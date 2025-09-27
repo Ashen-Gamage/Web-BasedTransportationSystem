@@ -1,0 +1,136 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #000000, #1a1a1a, #276EF1);
+    color: #fff;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 40px;
+    background: rgba(0,0,0,0.8);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.hero {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: url('../images/uber-bg.jpg') center/cover no-repeat;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.btn {
+    padding: 12px 25px;
+    margin: 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    background: #276EF1;
+    color: #fff;
+    font-weight: bold;
+}
+
+.btn-secondary {
+    background: #444;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 40px;
+    background: rgba(0,0,0,0.8);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li {
+    position: relative; /* Needed for dropdown positioning */
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 12px;
+    display: block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0; /* Align to right */
+    background-color: rgba(0,0,0,0.9);
+    min-width: 150px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+.dropdown-content a {
+    color: #fff;
+    padding: 10px 15px;
+}
+
+.dropdown-content a:hover {
+    background-color: #276EF1;
+    border-radius: 5px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block; /* Show dropdown on hover */
+}
+
+.dropbtn {
+    cursor: pointer;
+}
+.register-container {
+    background: rgba(0,0,0,0.8);
+    padding: 30px;
+    border-radius: 10px;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    margin: 50px auto;
+}
+
+.register-container input,
+.register-container button {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+}
+
+.register-container button {
+    background: #276EF1;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.register-container button:hover {
+    background: #1a4dc7;
+}
+
