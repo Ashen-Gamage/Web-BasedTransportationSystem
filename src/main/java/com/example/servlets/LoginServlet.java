@@ -6,7 +6,6 @@ import com.example.util.HashUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
-
 import java.io.IOException;
 
 @WebServlet("/login")
@@ -31,16 +30,35 @@ public class LoginServlet extends HttpServlet {
         try {
             UserDAO dao = new UserDAO();
             User u = dao.findByEmail(email.trim().toLowerCase());
+
+            // ✅ Verify user exists and password matches
             if (u == null || !HashUtil.verify(password, u.getPasswordHash())) {
                 req.setAttribute("error", "Invalid credentials.");
                 req.getRequestDispatcher("/login.jsp").forward(req, res);
                 return;
             }
 
+            // ✅ Set session attributes
             HttpSession session = req.getSession(true);
             session.setAttribute("userId", u.getId());
             session.setAttribute("userRole", u.getRole());
-            res.sendRedirect(req.getContextPath() + "/profile");
+            session.setAttribute("userName", u.getName());
+            session.setAttribute("userEmail", u.getEmail());
+
+            // 🔹 Redirect based on role stored in DB
+            String role = u.getRole() != null ? u.getRole().toUpperCase() : "USER";
+
+            switch (role) {
+                case "ADMIN":
+                    res.sendRedirect(req.getContextPath() + "/adminDashboard.jsp");
+                    break;
+                case "DRIVER":
+                    res.sendRedirect(req.getContextPath() + "/driverDashboard.jsp");
+                    break;
+                default:
+                    res.sendRedirect(req.getContextPath() + "/userDashboard.jsp");
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             req.setAttribute("error", "Server error. Try again.");

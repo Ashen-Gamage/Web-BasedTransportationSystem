@@ -1,5 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%
+    response.setHeader("Cache-Control","no-cache, no-store, must-revalidate");
+    response.setHeader("Pragma","no-cache");
+    response.setDateHeader("Expires", 0);
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

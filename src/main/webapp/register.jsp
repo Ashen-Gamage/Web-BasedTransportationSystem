@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+
 <%
   String role = (String) request.getAttribute("role");
   if (role == null) role = "user"; // default
