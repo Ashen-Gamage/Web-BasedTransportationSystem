@@ -14,6 +14,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        HttpSession session = req.getSession(false); // don’t create new session
         req.getRequestDispatcher("/login.jsp").forward(req, res);
     }
 
