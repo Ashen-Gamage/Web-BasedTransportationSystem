@@ -6,49 +6,47 @@ import com.example.util.HashUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
+
 import java.io.IOException;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
+
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         req.getRequestDispatcher("/login.jsp").forward(req, res);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        String email = req.getParameter("email");
+
+        String username = req.getParameter("username");
         String password = req.getParameter("password");
 
-        if (email == null || password == null || email.isBlank() || password.isBlank()) {
-            req.setAttribute("error", "Email and password are required.");
+        if (username == null || password == null || username.isBlank() || password.isBlank()) {
+            req.setAttribute("error", "Username and password are required.");
             req.getRequestDispatcher("/login.jsp").forward(req, res);
             return;
         }
 
         try {
             UserDAO dao = new UserDAO();
-            User u = dao.findByEmail(email.trim().toLowerCase());
+            User user = dao.findByUsername(username.trim());
 
-            // ✅ Verify user exists and password matches
-            if (u == null || !HashUtil.verify(password, u.getPasswordHash())) {
-                req.setAttribute("error", "Invalid credentials.");
+            if (user == null || !HashUtil.verify(password, user.getPasswordHash())) {
+                req.setAttribute("error", "Invalid username or password.");
                 req.getRequestDispatcher("/login.jsp").forward(req, res);
                 return;
             }
 
-            // ✅ Set session attributes
             HttpSession session = req.getSession(true);
-            session.setAttribute("userId", u.getId());
-            session.setAttribute("userRole", u.getRole());
-            session.setAttribute("userName", u.getName());
-            session.setAttribute("userEmail", u.getEmail());
+            session.setAttribute("userId", user.getId());
+            session.setAttribute("userName", user.getName());
+            session.setAttribute("userEmail", user.getEmail());
+            session.setAttribute("userRole", user.getRole());
 
-            // 🔹 Redirect based on role stored in DB
-            String role = u.getRole() != null ? u.getRole().toUpperCase() : "USER";
-
-            switch (role) {
+            switch (user.getRole().toUpperCase()) {
                 case "ADMIN":
                     res.sendRedirect(req.getContextPath() + "/adminDashboard.jsp");
                     break;

@@ -17,10 +17,11 @@
 </head>
 <body>
 <div class="login-container">
+  <h1>Sign In</h1>
   <form action="<%=request.getContextPath()%>/login" method="post" autocomplete="off">
     <div class="form-group">
-      <label>Email</label>
-      <input type="email" name="email" required autocomplete="off">
+      <label>Username</label>
+      <input type="text" name="username" required autocomplete="off">
     </div>
     <div class="form-group">
       <label>Password</label>
