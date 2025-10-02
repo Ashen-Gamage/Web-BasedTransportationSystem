@@ -89,6 +89,7 @@
     <div class="dashboard-links">
         <a href="<%=request.getContextPath()%>/profile.jsp">Profile</a>
         <a href="#rides-section">My Rides</a>
+        <a href="<%=request.getContextPath()%>/payment.jsp">payment</a>
         <a href="<%=request.getContextPath()%>/settings.jsp">Settings</a>
         <a href="<%=request.getContextPath()%>/logout">Logout</a>
     </div>

@@ -31,6 +31,7 @@
     <a href="<%=request.getContextPath()%>/profile">Profile</a>
     <a href="<%=request.getContextPath()%>/manageUsers">Manage Users</a>
     <a href="<%=request.getContextPath()%>/manageDrivers">Manage Drivers</a>
+    <a href="<%=request.getContextPath()%>/payment.jsp">payment</a>
     <a href="<%=request.getContextPath()%>/reports">Reports</a>
     <a href="<%=request.getContextPath()%>/settings">Settings</a>
     <a href="<%=request.getContextPath()%>/logout">Logout</a>
