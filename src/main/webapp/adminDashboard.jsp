@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.dao.PaymentDao.PaymentRow" %>
 
 <%
   response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
