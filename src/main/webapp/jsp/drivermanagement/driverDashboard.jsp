@@ -39,7 +39,7 @@
     <ul class="menu">
       <li><a href="<%=request.getContextPath()%>/driverProfile">Profile</a></li>
       <li><a href="<%=request.getContextPath()%>/jsp/drivermanagement/rideRequest.jsp"><i class="ri-car-line"></i> Ride Requests</a></li>
-      <li><a href="<%=request.getContextPath()%>/jsp/drivermanagement/assignments.jsp"><i class="ri-clipboard-line"></i> Assignments</a></li>
+      <li><a href="<%=request.getContextPath()%>/jsp/drivermanagement/allAssignments.jsp"><i class="ri-clipboard-line"></i> Assignments</a></li>
       <li><a href="<%=request.getContextPath()%>/logout"><i class="ri-logout-box-line"></i> Logout</a></li>
     </ul>
   </aside>
@@ -68,7 +68,7 @@
         <i class="ri-briefcase-line"></i>
         <h3>Assignments</h3>
         <p>Manage your current and past ride assignments.</p>
-        <a href="<%=request.getContextPath()%>/jsp/drivermanagement/assignments.jsp" class="btn">View Assignments</a>
+        <a href="<%=request.getContextPath()%>/jsp/drivermanagement/allAssignments.jsp" class="btn">View Assignments</a>
       </div>
     </div>
   </main>

@@ -23,8 +23,17 @@ public class DriverService {
         driverDAO.updateDriver(driver);
     }
 
-    public List<Assignment> getDriverAssignments(int driverId) throws SQLException {
-        return driverDAO.getAssignmentsByDriverId(driverId);
+    public List<Assignment> getAllAssignments() throws SQLException {
+        System.out.println("🔍 [Service] getAllAssignments() called...");
+        long startTime = System.currentTimeMillis();
+
+        List<Assignment> assignments = driverDAO.getFullAssignmentDetails();
+
+        long endTime = System.currentTimeMillis();
+        System.out.println("✅ [Service] DAO returned " + assignments.size() + " assignments in "
+                + (endTime - startTime) + "ms");
+
+        return assignments;
     }
 
     /*public List<RideRequest> getDriverRideRequests(int driverId) throws SQLException {
@@ -52,6 +61,16 @@ public class DriverService {
     }
     public void acceptRide(int rideId, int driverId, int userId) throws SQLException {
         driverDAO.acceptRideRequest(rideId, driverId, userId);
+    }
+
+    public boolean markRideAsCompleted(int rideId) {
+        System.out.println("🟡 [Service] markRideAsCompleted(" + rideId + ") called...");
+        return driverDAO.updateRideStatus(rideId, "completed");
+    }
+
+    public boolean deleteRideAndAssignment(int rideId) {
+        System.out.println("🟡 [Service] deleteRideAndAssignment(" + rideId + ") called...");
+        return driverDAO.deleteRideAndAssignment(rideId);
     }
 
 

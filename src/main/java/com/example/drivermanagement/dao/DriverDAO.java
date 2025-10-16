@@ -180,6 +180,131 @@ public class DriverDAO {
         }
     }
     // this methord for driver to delete ride if user change the d
+// Inside DriverDAO.java
+    public List<Assignment> getFullAssignmentDetails() throws SQLException {
+        System.out.println("📡 [DAO] Fetching full assignment details from database...");
+
+        List<Assignment> list = new ArrayList<>();
+
+        String sql = """
+        SELECT 
+            a.id AS assignment_id,
+            rr.id AS ride_id,
+            rr.pickup_location,
+            rr.dropoff_location,
+            rr.status AS ride_status,
+            a.assigned_time,
+            
+            rider.id AS rider_id,
+            rider.username AS rider_name,
+            rider.phone AS rider_phone,
+            
+            driverU.id AS driver_user_id,
+            driver.id AS driver_id,
+            driverU.username AS driver_name,
+            driverU.phone AS driver_phone,
+            driver.license_number,
+            driver.vehicle_type,
+            driver.status AS driver_status
+
+        FROM assignments a
+        JOIN ride_requests rr ON a.ride_id = rr.id
+        JOIN users rider ON a.rider_id = rider.id
+        JOIN drivers driver ON a.driver_id = driver.user_id
+        JOIN users driverU ON driver.user_id = driverU.id
+        ORDER BY a.assigned_time DESC
+        """;
+
+        try (Connection conn = DBUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            System.out.println("🟡 [DAO] SQL executed successfully. Reading results...");
+
+            while (rs.next()) {
+                Assignment a = new Assignment();
+                a.setAssignmentId(rs.getInt("assignment_id"));
+                a.setRideId(rs.getInt("ride_id"));
+                a.setPickupLocation(rs.getString("pickup_location"));
+                a.setDropoffLocation(rs.getString("dropoff_location"));
+                a.setRideStatus(rs.getString("ride_status"));
+                a.setAssignedTime(rs.getTimestamp("assigned_time"));
+
+                a.setRiderId(rs.getInt("rider_id"));
+                a.setRiderName(rs.getString("rider_name"));
+                a.setRiderPhone(rs.getString("rider_phone"));
+
+                a.setDriverId(rs.getInt("driver_id"));
+                a.setDriverName(rs.getString("driver_name"));
+                a.setDriverPhone(rs.getString("driver_phone"));
+                a.setLicenseNumber(rs.getString("license_number"));
+                a.setVehicleType(rs.getString("vehicle_type"));
+                a.setDriverStatus(rs.getString("driver_status"));
+
+                list.add(a);
+            }
+
+            System.out.println("✅ [DAO] Data fetch complete. Total rows found: " + list.size());
+
+        } catch (SQLException e) {
+            System.out.println("❌ [DAO ERROR] SQL Exception during getFullAssignmentDetails(): " + e.getMessage());
+            e.printStackTrace();
+            throw e;
+        }
+
+        return list;
+    }
+
+    public boolean updateRideStatus(int rideId, String newStatus) {
+        String sql = "UPDATE ride_requests SET status = ? WHERE id = ?";
+        try (Connection conn = DBUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, newStatus);
+            stmt.setInt(2, rideId);
+            int rows = stmt.executeUpdate();
+
+            System.out.println("✅ [DAO] Ride status updated for Ride ID " + rideId + ", rows affected: " + rows);
+            return rows > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+    public boolean deleteRideAndAssignment(int rideId) {
+        String deleteAssignmentSQL = "DELETE FROM assignments WHERE ride_id = ?";
+        String deleteRideSQL = "DELETE FROM ride_requests WHERE id = ?";
+
+        try (Connection conn = DBUtil.getConnection()) {
+            conn.setAutoCommit(false); // Start transaction
+
+            // Delete from assignments first
+            try (PreparedStatement stmt1 = conn.prepareStatement(deleteAssignmentSQL)) {
+                stmt1.setInt(1, rideId);
+                stmt1.executeUpdate();
+            }
+
+            // Delete from ride_requests table
+            try (PreparedStatement stmt2 = conn.prepareStatement(deleteRideSQL)) {
+                stmt2.setInt(1, rideId);
+                int rows = stmt2.executeUpdate();
+
+                conn.commit(); // Commit both
+                System.out.println("✅ [DAO] Deleted ride_request and assignment for Ride ID " + rideId);
+                return rows > 0;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            try {
+                System.out.println("⚠️ [DAO] Transaction rollback for Ride ID " + rideId);
+            } catch (Exception ignored) {}
+            return false;
+        }
+    }
+
 
 
 }

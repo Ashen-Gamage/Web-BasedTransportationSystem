@@ -15,27 +15,37 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/driverAssignments")
+@WebServlet("/allAssignments")
 public class DriverAssignmentsServlet extends HttpServlet {
     private final DriverService driverService = new DriverService();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        if (user == null || !"driver".equals(user.getRole())) {
-            response.sendRedirect(request.getContextPath() + "/jsp/user/login.jsp");
-            return;
-        }
-
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        System.out.println("🚀 [Servlet] /allAssignments endpoint hit — Starting process...");
         try {
-            Driver driver = driverService.getDriverByUserId(user.getId());
-            List<Assignment> assignments = driverService.getDriverAssignments(driver.getId());
+            System.out.println("🟡 [Servlet] Calling service layer -> getAllAssignments()");
+            List<Assignment> assignments = driverService.getAllAssignments();
+
+            if (assignments == null) {
+                System.out.println("❌ [Servlet] assignments is NULL");
+            } else {
+                System.out.println("✅ [Servlet] assignments received. Total: " + assignments.size());
+            }
+
             request.setAttribute("assignments", assignments);
-            request.getRequestDispatcher("/jsp/drivermanagement/assignments.jsp").forward(request, response);
+            request.getRequestDispatcher("/jsp/drivermanagement/allAssignments.jsp")
+                    .forward(request, response);
+            System.out.println("📦 [Servlet] Forwarded to JSP successfully.");
+
         } catch (SQLException e) {
+            System.out.println("❌ [Servlet] SQL Exception: " + e.getMessage());
             request.setAttribute("error", "Failed to load assignments: " + e.getMessage());
-            request.getRequestDispatcher("/jsp/drivermanagement/assignments.jsp").forward(request, response);
+            request.getRequestDispatcher("/jsp/drivermanagement/allAssignments.jsp")
+                    .forward(request, response);
         }
     }
+
 }
+
+
