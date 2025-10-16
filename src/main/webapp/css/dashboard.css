@@ -1,0 +1,168 @@
+/* ===== Driver Dashboard (Uber-style) ===== */
+
+/* ---------- CSS Reset (light) ---------- */
+* { box-sizing: border-box; }
+html, body { height: 100%; margin:0; padding:0; }
+body, h1, h2, h3, p, ul, ol { margin: 0; }
+button, input, select { font: inherit; }
+
+/* ---------- Theme Colors ---------- */
+:root {
+    --bg: #0b0c0f;
+    --panel: #1f1f2e;
+    --muted: #9aa4b2;
+    --text: #eef2f7;
+    --accent: #2563eb;
+    --primary-cta: #2563eb;
+    --primary-cta-text: #fff;
+    --border: #2a2a3c;
+    --row-hover: #262636;
+    --radius: 12px;
+}
+
+/* ---------- Base Styles ---------- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+}
+
+/* ---------- Dashboard Container ---------- */
+.dashboard-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* Top welcome */
+.dashboard-container h1 {
+    font-size: 28px;
+    margin-bottom: 6px;
+    color: var(--text);
+}
+.dashboard-container p {
+    color: var(--muted);
+    margin-bottom: 18px;
+}
+
+/* Quick links / navigation */
+.dashboard-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 12px;
+    background: var(--panel);
+    border-radius: var(--radius);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+.dashboard-links a {
+    text-decoration: none;
+    color: var(--primary-cta-text);
+    background: var(--primary-cta);
+    padding: 8px 14px;
+    border-radius: 999px;
+    transition: transform .1s ease, filter .2s ease;
+}
+.dashboard-links a:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+/* Section heading */
+h2 {
+    margin: 24px 0 12px;
+    color: var(--accent);
+    font-size: 20px;
+}
+
+/* Assigned Rides Table */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+thead th {
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 14px 16px;
+    background: #2a2a3c;
+    color: var(--muted);
+}
+
+tbody td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+    color: var(--text);
+}
+
+tbody tr:hover { background: var(--row-hover); }
+
+/* Status Pills */
+.status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+    text-transform: uppercase;
+}
+.status.assigned { background: #dbeafe; color: #1e40af; }
+.status.accepted { background: #fef3c7; color: #b45309; }
+.status.on_the_way { background: #bfdbfe; color: #1e3a8a; }
+.status.in_ride { background: #e0d7ff; color: #4c1d95; }
+.status.completed { background: #bbf7d0; color: #14532d; }
+
+/* Actions (forms/buttons inside table) */
+.actions { white-space: nowrap; }
+button, .btn {
+    background: var(--primary-cta);
+    color: var(--primary-cta-text);
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform .05s ease, filter .2s ease;
+}
+button:hover, .btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
+button:active, .btn:active { transform: translateY(1px); }
+button.secondary { background: #2a2a3c; color: var(--text); border: 1px solid var(--border); }
+
+.actions form { display: inline-flex; gap: 6px; align-items: center; }
+
+/* Select dropdown */
+select {
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    padding: 6px 10px;
+    background: #1f1f2e;
+    color: var(--text);
+}
+
+/* Responsive Table */
+@media (max-width: 900px){
+    thead { display: none; }
+    table, tbody, tr, td { display: block; width: 100%; }
+    tbody tr { margin: 10px 0; border: 1px solid var(--border); border-radius: 10px; padding: 10px; }
+    tbody td {
+        border: none;
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        gap: 6px;
+        padding: 10px;
+    }
+    tbody td::before { content: attr(data-label); font-weight: 700; color: var(--muted); text-transform: uppercase; font-size: 11px; }
+}
+
+/* Utility */
+.section { background: var(--panel); border-radius: var(--radius); padding: 16px; margin-top: 16px; }
+

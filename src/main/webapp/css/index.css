@@ -1,0 +1,172 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Arial", sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #000;
+    color: #fff;
+    padding: 15px 40px;
+}
+
+.navbar .logo a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.navbar nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.navbar nav ul li {
+    margin-left: 20px;
+}
+
+.navbar nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.navbar nav ul li a:hover {
+    color: #1db954; /* green Uber-like accent */
+}
+
+/* Dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background: #fff;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: #000;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background: #f1f1f1;
+}
+
+.show {
+    display: block;
+}
+
+/* Hero Section */
+.hero {
+    height: 90vh;
+    background: url('../images/uber-bg.jpg') no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.btn {
+    padding: 12px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.btn.primary {
+    background: #000;
+    color: #fff;
+    border: 2px solid #fff;
+}
+
+.btn.primary:hover {
+    background: #1db954;
+    border-color: #1db954;
+}
+
+.btn.secondary {
+    background: #fff;
+    color: #000;
+    border: 2px solid #000;
+}
+
+.btn.secondary:hover {
+    background: #1db954;
+    color: #fff;
+    border-color: #1db954;
+}
+
+/* Info Section */
+.info {
+    display: flex;
+    justify-content: space-around;
+    padding: 60px 20px;
+    background: #f9f9f9;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.info-box {
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 300px;
+    text-align: center;
+}
+
+.info-box h2 {
+    margin-bottom: 10px;
+    font-size: 22px;
+    color: #000;
+}
+
+.info-box p {
+    font-size: 15px;
+    color: #333;
+}
+
+/* Footer */
+footer {
+    background: #000;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+    font-size: 14px;
+}
