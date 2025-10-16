@@ -1,168 +1,226 @@
-/* ===== Driver Dashboard (Uber-style) ===== */
+/* =========================
+   Dashboard & Book Ride CSS
+========================= */
 
-/* ---------- CSS Reset (light) ---------- */
-* { box-sizing: border-box; }
-html, body { height: 100%; margin:0; padding:0; }
-body, h1, h2, h3, p, ul, ol { margin: 0; }
-button, input, select { font: inherit; }
-
-/* ---------- Theme Colors ---------- */
-:root {
-    --bg: #0b0c0f;
-    --panel: #1f1f2e;
-    --muted: #9aa4b2;
-    --text: #eef2f7;
-    --accent: #2563eb;
-    --primary-cta: #2563eb;
-    --primary-cta-text: #fff;
-    --border: #2a2a3c;
-    --row-hover: #262636;
-    --radius: 12px;
+/* ---------- Reset ---------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-/* ---------- Base Styles ---------- */
-body {
+html, body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.5;
+    height: 100%;
+    background-color: #f4f6f9;
+    color: #2D3748;
 }
 
-/* ---------- Dashboard Container ---------- */
-.dashboard-container {
-    max-width: 1200px;
-    margin: 30px auto;
-    padding: 0 20px;
-}
-
-/* Top welcome */
-.dashboard-container h1 {
-    font-size: 28px;
-    margin-bottom: 6px;
-    color: var(--text);
-}
-.dashboard-container p {
-    color: var(--muted);
-    margin-bottom: 18px;
-}
-
-/* Quick links / navigation */
-.dashboard-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 12px;
-    background: var(--panel);
-    border-radius: var(--radius);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-}
-.dashboard-links a {
+a {
     text-decoration: none;
-    color: var(--primary-cta-text);
-    background: var(--primary-cta);
-    padding: 8px 14px;
-    border-radius: 999px;
-    transition: transform .1s ease, filter .2s ease;
-}
-.dashboard-links a:hover {
-    transform: translateY(-2px);
-    filter: brightness(1.1);
+    color: inherit;
 }
 
-/* Section heading */
-h2 {
-    margin: 24px 0 12px;
-    color: var(--accent);
-    font-size: 20px;
+/* ---------- Dashboard Layout ---------- */
+.dashboard {
+    display: flex;
+    min-height: 100vh;
 }
 
-/* Assigned Rides Table */
-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+/* ---------- Sidebar ---------- */
+.sidebar {
+    width: 250px;
+    background-color: #1e293b;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
 }
 
-thead th {
-    text-align: left;
-    font-size: 13px;
-    font-weight: 700;
-    padding: 14px 16px;
-    background: #2a2a3c;
-    color: var(--muted);
-}
-
-tbody td {
-    padding: 14px 16px;
-    border-bottom: 1px solid var(--border);
-    vertical-align: middle;
-    color: var(--text);
-}
-
-tbody tr:hover { background: var(--row-hover); }
-
-/* Status Pills */
-.status {
-    display: inline-flex;
+.sidebar-header {
+    display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    font-weight: 700;
-    padding: 4px 10px;
-    border-radius: 999px;
-    text-transform: uppercase;
+    justify-content: center;
+    padding: 1.5rem 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
 }
-.status.assigned { background: #dbeafe; color: #1e40af; }
-.status.accepted { background: #fef3c7; color: #b45309; }
-.status.on_the_way { background: #bfdbfe; color: #1e3a8a; }
-.status.in_ride { background: #e0d7ff; color: #4c1d95; }
-.status.completed { background: #bbf7d0; color: #14532d; }
 
-/* Actions (forms/buttons inside table) */
-.actions { white-space: nowrap; }
-button, .btn {
-    background: var(--primary-cta);
-    color: var(--primary-cta-text);
-    border: none;
-    padding: 6px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: transform .05s ease, filter .2s ease;
+.menu {
+    list-style: none;
+    padding: 1rem 0;
+    flex-grow: 1;
 }
-button:hover, .btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
-button:active, .btn:active { transform: translateY(1px); }
-button.secondary { background: #2a2a3c; color: var(--text); border: 1px solid var(--border); }
 
-.actions form { display: inline-flex; gap: 6px; align-items: center; }
+.menu li {
+    margin: 0.5rem 0;
+}
 
-/* Select dropdown */
-select {
+.menu li a {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1rem;
     border-radius: 6px;
-    border: 1px solid var(--border);
-    padding: 6px 10px;
-    background: #1f1f2e;
-    color: var(--text);
+    transition: all 0.2s ease;
 }
 
-/* Responsive Table */
-@media (max-width: 900px){
-    thead { display: none; }
-    table, tbody, tr, td { display: block; width: 100%; }
-    tbody tr { margin: 10px 0; border: 1px solid var(--border); border-radius: 10px; padding: 10px; }
-    tbody td {
-        border: none;
-        display: grid;
-        grid-template-columns: 120px 1fr;
-        gap: 6px;
-        padding: 10px;
+.menu li a i {
+    margin-right: 0.8rem;
+    font-size: 1.2rem;
+}
+
+.menu li a:hover,
+.menu li a.active {
+    background-color: #334155;
+}
+
+/* ---------- Main Content ---------- */
+.main-content {
+    flex-grow: 1;
+    padding: 2rem;
+}
+
+.main-content h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #111827;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: #64748b;
+    margin-bottom: 1.5rem;
+}
+
+/* ---------- Ride Option Cards ---------- */
+.ride-options {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.ride-card {
+    flex: 1 1 200px;
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    color: #fff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.ride-card i {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.ride-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+}
+
+.ride-card p {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    color: rgba(255,255,255,0.85);
+}
+
+.ride-card .price {
+    font-weight: bold;
+    font-size: 1rem;
+    background-color: rgba(255,255,255,0.2);
+    padding: 0.3rem 0.6rem;
+    border-radius: 8px;
+}
+
+.ride-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+/* ---------- Book Ride Form ---------- */
+.uber-form {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    max-width: 600px;
+    margin-top: 2rem;
+}
+
+.uber-form label {
+    display: block;
+    font-weight: 600;
+    margin-top: 1rem;
+    color: #1e293b;
+}
+
+.uber-form input[type="text"],
+.uber-form input[type="date"],
+.uber-form input[type="time"] {
+    width: 100%;
+    padding: 0.7rem;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    margin-top: 0.3rem;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.uber-form input[type="text"]:focus,
+.uber-form input[type="date"]:focus,
+.uber-form input[type="time"]:focus {
+    border-color: #2563eb;
+}
+
+.datetime {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.datetime div {
+    flex: 1;
+}
+
+.book-btn {
+    margin-top: 1.5rem;
+    width: 100%;
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    padding: 0.9rem;
+    font-size: 1.05rem;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.book-btn:hover {
+    background: #1d4ed8;
+}
+
+/* ---------- Responsive ---------- */
+@media screen and (max-width: 768px) {
+    .dashboard {
+        flex-direction: column;
     }
-    tbody td::before { content: attr(data-label); font-weight: 700; color: var(--muted); text-transform: uppercase; font-size: 11px; }
+
+    .sidebar {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+    }
+
+    .menu li a {
+        padding: 0.5rem;
+    }
+
+    .ride-options {
+        flex-direction: column;
+    }
 }
-
-/* Utility */
-.section { background: var(--panel); border-radius: var(--radius); padding: 16px; margin-top: 16px; }
-

@@ -1,4 +1,4 @@
-package com.example.util;
+package com.example.common.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class DBUtil {
     private static final String URL =
             "jdbc:sqlserver://localhost:1433;"
-                    + "databaseName=transport_app;"
+                    + "databaseName=uberclone;"
                     + "encrypt=true;trustServerCertificate=true;";
     private static final String USER = "sa";    // <-- change
     private static final String PASSWORD = "AshenGeeth"; // <-- change

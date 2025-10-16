@@ -1,4 +1,4 @@
-package com.example.drivermanagement.dao;
+package com.example.admin.dao;
 
 import com.example.common.utils.DBUtil;
 import com.example.drivermanagement.model.Driver;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DriverDAO {
+public class AdminDAO {
 
     public void saveDriver(Driver driver) throws SQLException {
         String sql = "INSERT INTO drivers (user_id, license_number, vehicle_type, status) VALUES (?, ?, ?, ?)";

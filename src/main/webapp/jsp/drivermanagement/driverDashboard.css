@@ -1,0 +1,200 @@
+/* ==============================
+   DRIVER DASHBOARD (Uber-style)
+   ============================== */
+
+/* ---------- Reset ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* ---------- Body Layout ---------- */
+body {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f3f4f6;
+    color: #111827;
+}
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+    width: 260px;
+    background: #111827;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    position: fixed;
+    height: 100%;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-header {
+    text-align: center;
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #374151;
+    letter-spacing: 0.5px;
+}
+
+.menu {
+    list-style: none;
+    flex: 1;
+}
+
+.menu li {
+    margin: 10px 0;
+}
+
+.menu a {
+    display: flex;
+    align-items: center;
+    color: #d1d5db;
+    text-decoration: none;
+    padding: 12px 25px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+}
+
+.menu a i {
+    margin-right: 10px;
+    font-size: 1.3rem;
+}
+
+.menu a:hover,
+.menu a.active {
+    background: #1f2937;
+    color: #fff;
+    border-left: 4px solid #3b82f6;
+}
+
+/* ---------- Logout at Bottom ---------- */
+.menu li:last-child {
+    margin-top: auto;
+    border-top: 1px solid #374151;
+    padding-top: 15px;
+}
+
+/* ---------- Main Content ---------- */
+.main-content {
+    margin-left: 260px;
+    padding: 40px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.main-content h1 {
+    font-size: 2rem;
+    color: #111827;
+    margin-bottom: 10px;
+}
+
+.main-content p {
+    font-size: 1rem;
+    color: #6b7280;
+    margin-bottom: 35px;
+}
+
+/* ---------- Dashboard Cards ---------- */
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    padding: 25px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.card i {
+    font-size: 2.2rem;
+    color: #3b82f6;
+    margin-bottom: 12px;
+}
+
+.card h3 {
+    color: #111827;
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+
+.card p {
+    color: #6b7280;
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+}
+
+.btn {
+    display: inline-block;
+    background: #3b82f6;
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background: #2563eb;
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #9ca3af;
+    border-radius: 10px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 220px;
+    }
+
+    .main-content {
+        margin-left: 220px;
+        padding: 25px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .main-content h1 {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .sidebar {
+        display: none;
+    }
+
+    .main-content {
+        margin: 0;
+        padding: 20px;
+    }
+
+    .dashboard-cards {
+        grid-template-columns: 1fr;
+    }
+}

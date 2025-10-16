@@ -1,4 +1,4 @@
-package com.example.ridebooking.model;
+package com.example.drivermanagement.model;
 
 import java.time.LocalDateTime;
 
@@ -9,6 +9,16 @@ public class RideRequest {
     private String dropoffLocation;
     private LocalDateTime requestTime;
     private String status;
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
 
     // Getters and Setters
     public int getId() { return id; }

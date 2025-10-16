@@ -1,172 +1,263 @@
-/* Reset */
+/* =========================
+   Root Theme - Uber Modern
+   ========================= */
+:root {
+    --primary: #000000;
+    --secondary: #1FBAD6;
+    --accent: #f9f9f9;
+    --white: #ffffff;
+    --text: #222;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --gradient: linear-gradient(135deg, #000000, #1FBAD6);
+}
+
+/* =========================
+   Reset
+   ========================= */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Arial", sans-serif;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
 }
 
-/* Navbar */
+/* =========================
+   Navbar
+   ========================= */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #000;
-    color: #fff;
-    padding: 15px 40px;
+    background: var(--primary);
+    color: var(--white);
+    padding: 15px 50px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    box-shadow: var(--shadow);
 }
 
-.navbar .logo a {
-    color: #fff;
+.logo a {
+    color: var(--white);
     text-decoration: none;
     font-size: 22px;
-    font-weight: bold;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
-.navbar nav ul {
+.nav-actions {
     list-style: none;
     display: flex;
     align-items: center;
+    gap: 25px;
 }
 
-.navbar nav ul li {
-    margin-left: 20px;
-}
-
-.navbar nav ul li a {
-    color: #fff;
+.nav-actions li a {
+    color: var(--white);
     text-decoration: none;
     font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease;
 }
 
-.navbar nav ul li a:hover {
-    color: #1db954; /* green Uber-like accent */
+.nav-actions li a:hover {
+    color: var(--secondary);
 }
 
-/* Dropdown */
+/* =========================
+   Dropdown
+   ========================= */
 .dropdown {
     position: relative;
-    display: inline-block;
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
-    background: #fff;
+    top: 35px;
+    right: 0;
+    background: var(--white);
     min-width: 160px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-    z-index: 1;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.2);
 }
 
 .dropdown-content a {
-    color: #000;
+    color: var(--text);
     padding: 10px 15px;
     text-decoration: none;
     display: block;
+    font-size: 14px;
+    transition: all 0.2s ease;
 }
 
 .dropdown-content a:hover {
-    background: #f1f1f1;
+    background: var(--secondary);
+    color: var(--white);
 }
 
 .show {
     display: block;
 }
 
-/* Hero Section */
+/* =========================
+   Hero Section
+   ========================= */
 .hero {
-    height: 90vh;
-    background: url('../images/uber-bg.jpg') no-repeat center center/cover;
+    height: 100vh;
+    background: url('../images/uber-bg.jpg') center/cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
+    position: relative;
     text-align: center;
-    padding: 20px;
+    color: var(--white);
+    padding: 0 1rem;
 }
 
-.hero h1 {
-    font-size: 48px;
+.hero .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.55);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 650px;
+    animation: fadeIn 0.8s ease;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.2;
     margin-bottom: 15px;
 }
 
-.hero p {
-    font-size: 20px;
-    margin-bottom: 25px;
+.hero-content h1 span {
+    color: var(--secondary);
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #eee;
 }
 
 .cta-buttons {
     display: flex;
     justify-content: center;
     gap: 20px;
+    flex-wrap: wrap;
 }
 
 .btn {
-    padding: 12px 24px;
+    padding: 12px 28px;
     border-radius: 30px;
     text-decoration: none;
-    font-weight: bold;
-    transition: all 0.3s;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
 }
 
 .btn.primary {
-    background: #000;
-    color: #fff;
-    border: 2px solid #fff;
+    background: var(--secondary);
+    color: var(--white);
+    border: 2px solid transparent;
 }
 
 .btn.primary:hover {
-    background: #1db954;
-    border-color: #1db954;
+    background: var(--white);
+    color: var(--primary);
+    border-color: var(--white);
 }
 
 .btn.secondary {
-    background: #fff;
-    color: #000;
-    border: 2px solid #000;
+    background: transparent;
+    border: 2px solid var(--white);
+    color: var(--white);
 }
 
 .btn.secondary:hover {
-    background: #1db954;
-    color: #fff;
-    border-color: #1db954;
+    background: var(--secondary);
+    color: var(--white);
 }
 
-/* Info Section */
+/* =========================
+   Info Section
+   ========================= */
 .info {
     display: flex;
-    justify-content: space-around;
-    padding: 60px 20px;
-    background: #f9f9f9;
+    justify-content: center;
+    gap: 30px;
     flex-wrap: wrap;
-    gap: 20px;
+    padding: 80px 20px;
+    background: var(--accent);
 }
 
 .info-box {
-    background: #fff;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
     width: 300px;
+    padding: 30px 20px;
     text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.info-box .icon {
+    font-size: 40px;
+    color: var(--secondary);
+    margin-bottom: 15px;
 }
 
 .info-box h2 {
+    font-size: 1.3rem;
+    color: var(--primary);
     margin-bottom: 10px;
-    font-size: 22px;
-    color: #000;
 }
 
 .info-box p {
-    font-size: 15px;
-    color: #333;
+    color: #555;
+    font-size: 0.95rem;
 }
 
-/* Footer */
+/* =========================
+   Footer
+   ========================= */
 footer {
-    background: #000;
-    color: #fff;
-    padding: 15px;
+    background: var(--primary);
+    color: var(--white);
+    padding: 18px;
     text-align: center;
-    font-size: 14px;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+/* =========================
+   Animations
+   ========================= */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================
+   Responsive
+   ========================= */
+@media (max-width: 768px) {
+    .hero-content h1 { font-size: 2.2rem; }
+    .info-box { width: 90%; }
+    .navbar { padding: 15px 25px; }
 }

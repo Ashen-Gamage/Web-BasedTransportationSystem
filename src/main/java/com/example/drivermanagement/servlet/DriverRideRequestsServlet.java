@@ -1,8 +1,8 @@
 package com.example.drivermanagement.servlet;
 
 import com.example.drivermanagement.model.Driver;
+import com.example.drivermanagement.model.RideRequest;
 import com.example.drivermanagement.service.DriverService;
-import com.example.ridebooking.model.RideRequest;
 import com.example.user.model.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -20,22 +20,46 @@ public class DriverRideRequestsServlet extends HttpServlet {
     private final DriverService driverService = new DriverService();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+
+        System.out.println("🔍 STEP 1: === DRIVER RIDE REQUESTS SERVLET STARTED ===");
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
+        Driver driver = (Driver) session.getAttribute("driver");
+
+        System.out.println("🔍 STEP 1: User=" + (user != null ? user.getUsername() + "(" + user.getRole() + ")" : "NULL"));
+        System.out.println("🔍 STEP 1: Driver=" + (driver != null ? driver.getId() : "NULL"));
+
         if (user == null || !"driver".equals(user.getRole())) {
+            System.out.println("❌ STEP 1: REDIRECTING TO LOGIN (Not driver)");
             response.sendRedirect(request.getContextPath() + "/jsp/user/login.jsp");
             return;
         }
+        System.out.println("✅ STEP 1: Driver authenticated! Proceeding...");
 
         try {
-            Driver driver = driverService.getDriverByUserId(user.getId());
-            List<RideRequest> rideRequests = driverService.getDriverRideRequests(driver.getId());
-            request.setAttribute("rideRequests", rideRequests);
-            request.getRequestDispatcher("/jsp/drivermanagement/riderequests.jsp").forward(request, response);
+            System.out.println("🔍 STEP 2: Calling DriverService.getDriverRideRequests(" + driver.getId() + ")");
+            long startTime = System.currentTimeMillis();
+
+            List<RideRequest> pendingRides = driverService.getDriverRideRequests(driver.getId());
+
+            long endTime = System.currentTimeMillis();
+            System.out.println("⏱️  STEP 2: Service call took " + (endTime - startTime) + "ms");
+
+            System.out.println("✅ STEP 6: Setting 'pendingRides' attribute. Size=" + pendingRides.size());
+            request.setAttribute("pendingRides", pendingRides);
+
         } catch (SQLException e) {
-            request.setAttribute("error", "Failed to load ride requests: " + e.getMessage());
-            request.getRequestDispatcher("/jsp/drivermanagement/riderequests.jsp").forward(request, response);
+            System.out.println("❌ STEP 2: SQL ERROR: " + e.getMessage());
+            e.printStackTrace();
+            request.setAttribute("error", "Unable to load pending rides.");
         }
+
+        System.out.println("🔍 STEP 7: Forwarding to bookride.jsp");
+        request.getRequestDispatcher("/jsp/drivermanagement/rideRequest.jsp").forward(request, response);
+        System.out.println("✅ COMPLETE: === SERVLET FLOW FINISHED SUCCESSFULLY ===");
+
     }
 }

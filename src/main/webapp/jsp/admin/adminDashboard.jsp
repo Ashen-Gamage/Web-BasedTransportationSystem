@@ -35,7 +35,7 @@
     <div class="logo"><a href="<%=request.getContextPath()%>/index.jsp">RideNow</a></div>
     <nav>
         <ul class="nav-actions">
-            <li><a href="<%=request.getContextPath()%>/jsp/user/adminDashboard.jsp">Dashboard</a></li>
+            <li><a href="<%=request.getContextPath()%>/jsp/admin/adminDashboard.jsp">Dashboard</a></li>
             <li><a href="<%=request.getContextPath()%>/logout">Logout</a></li>
         </ul>
     </nav>

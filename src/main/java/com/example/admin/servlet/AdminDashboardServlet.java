@@ -1,6 +1,6 @@
-package com.example.drivermanagement.servlet;
+package com.example.admin.servlet;
 
-import com.example.drivermanagement.dao.DriverDAO;
+import com.example.admin.dao.AdminDAO;
 import com.example.drivermanagement.model.Driver;
 import com.example.user.model.User;
 import jakarta.servlet.ServletException;
@@ -16,7 +16,7 @@ import java.util.List;
 @WebServlet("/admin/dashboard")
 public class AdminDashboardServlet extends HttpServlet {
 
-    private final DriverDAO driverDAO = new DriverDAO();
+    private final AdminDAO adminDAO = new AdminDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,9 +29,9 @@ public class AdminDashboardServlet extends HttpServlet {
 
         try {
             // Fetch drivers by status
-            List<Driver> activeDrivers = driverDAO.findDriversByStatus("Active");
-            List<Driver> inactiveDrivers = driverDAO.findDriversByStatus("Inactive");
-            List<Driver> busyDrivers = driverDAO.findDriversByStatus("busy"); // Match your DB values
+            List<Driver> activeDrivers = adminDAO.findDriversByStatus("Active");
+            List<Driver> inactiveDrivers = adminDAO.findDriversByStatus("Inactive");
+            List<Driver> busyDrivers = adminDAO.findDriversByStatus("busy"); // Match your DB values
 
             // Set attributes for JSP
             request.setAttribute("activeDrivers", activeDrivers);

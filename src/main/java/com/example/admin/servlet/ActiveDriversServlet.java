@@ -1,6 +1,6 @@
-package com.example.drivermanagement.servlet;
+package com.example.admin.servlet;
 
-import com.example.drivermanagement.dao.DriverDAO;
+import com.example.admin.dao.AdminDAO;
 import com.example.drivermanagement.model.Driver;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,12 +14,12 @@ import java.util.List;
 
 @WebServlet("/activeDrivers")
 public class ActiveDriversServlet extends HttpServlet {
-    private final DriverDAO driverDAO = new DriverDAO();
+    private final AdminDAO adminDAO = new AdminDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            List<Driver> activeDrivers = driverDAO.findActiveDrivers();
+            List<Driver> activeDrivers = adminDAO.findActiveDrivers();
             request.setAttribute("drivers", activeDrivers);
             request.getRequestDispatcher("/jsp/drivermanagement/activeDrivers.jsp").forward(request, response);
         } catch (SQLException e) {

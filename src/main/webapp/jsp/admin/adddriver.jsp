@@ -33,7 +33,7 @@
   </form>
 
   <div class="back-link">
-    <a href="<%=request.getContextPath()%>/jsp/drivermanagement/manage.jsp">Back to Driver Management</a>
+    <a href="<%=request.getContextPath()%>/jsp/admin/manage.jsp">Back to Driver Management</a>
   </div>
 </div>
 

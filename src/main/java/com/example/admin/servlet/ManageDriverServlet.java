@@ -1,6 +1,6 @@
-package com.example.drivermanagement.servlet;
+package com.example.admin.servlet;
 
-import com.example.drivermanagement.dao.DriverDAO;
+import com.example.admin.dao.AdminDAO;
 import com.example.drivermanagement.model.Driver;
 import com.example.user.model.User;
 import jakarta.servlet.ServletException;
@@ -14,7 +14,7 @@ import java.sql.SQLException;
 
 @WebServlet("/manageDriver")
 public class ManageDriverServlet extends HttpServlet {
-    private final DriverDAO driverDAO = new DriverDAO();
+    private final AdminDAO adminDAO = new AdminDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,7 +25,7 @@ public class ManageDriverServlet extends HttpServlet {
         }
 
         try {
-            Driver driver = driverDAO.findDriverByUserId(user.getId());
+            Driver driver = adminDAO.findDriverByUserId(user.getId());
             if (driver == null) {
                 driver = new Driver();
                 driver.setUserId(user.getId());
@@ -53,11 +53,11 @@ public class ManageDriverServlet extends HttpServlet {
         driver.setStatus(request.getParameter("status"));
 
         try {
-            Driver existingDriver = driverDAO.findDriverByUserId(user.getId());
+            Driver existingDriver = adminDAO.findDriverByUserId(user.getId());
             if (existingDriver == null) {
-                driverDAO.saveDriver(driver);
+                adminDAO.saveDriver(driver);
             } else {
-                driverDAO.updateDriverStatus(driver.getId(), driver.getStatus());
+                adminDAO.updateDriverStatus(driver.getId(), driver.getStatus());
             }
             request.setAttribute("message", "Driver profile updated successfully");
             request.setAttribute("driver", driver);

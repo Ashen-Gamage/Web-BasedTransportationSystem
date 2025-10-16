@@ -22,18 +22,22 @@ public class ViewPaymentCardsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
+
         if (user == null || !"rider".equals(user.getRole())) {
             response.sendRedirect(request.getContextPath() + "/jsp/user/login.jsp");
             return;
         }
 
         try {
+            // ✅ Fetch payment cards before showing page (like pending rides)
             List<PaymentCard> cards = paymentService.getPaymentCards(user.getId());
             request.setAttribute("cards", cards);
-            request.getRequestDispatcher("/jsp/payment/viewcards.jsp").forward(request, response);
         } catch (SQLException e) {
-            request.setAttribute("error", "Failed to load payment cards: " + e.getMessage());
-            request.getRequestDispatcher("/jsp/payment/viewcards.jsp").forward(request, response);
+            e.printStackTrace();
+            request.setAttribute("error", "Failed to load payment cards.");
         }
+
+        // ✅ Forward once at the end
+        request.getRequestDispatcher("/jsp/payment/viewcards.jsp").forward(request, response);
     }
 }
