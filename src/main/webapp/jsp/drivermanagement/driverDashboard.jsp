@@ -40,6 +40,7 @@
       <li><a href="<%=request.getContextPath()%>/driverProfile">Profile</a></li>
       <li><a href="<%=request.getContextPath()%>/jsp/drivermanagement/rideRequest.jsp"><i class="ri-car-line"></i> Ride Requests</a></li>
       <li><a href="<%=request.getContextPath()%>/jsp/drivermanagement/allAssignments.jsp"><i class="ri-clipboard-line"></i> Assignments</a></li>
+      <li><a href="<%=request.getContextPath()%>/jsp/drivermanagement/driverFeedback.jsp"><i class="ri-clipboard-line"></i> Feedback</a></li>
       <li><a href="<%=request.getContextPath()%>/logout"><i class="ri-logout-box-line"></i> Logout</a></li>
     </ul>
   </aside>

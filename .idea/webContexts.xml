@@ -9,6 +9,8 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/jsp/drivermanagement/rideRequest.jsp" value="file://$PROJECT_DIR$/src/main/webapp/jsp/drivermanagement" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/jsp/drivermanagement/riderequest.jsp" value="file://$PROJECT_DIR$/src/main/webapp/jsp/drivermanagement" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/jsp/payment/viewcards.jsp" value="file://$PROJECT_DIR$/src/main/webapp/jsp/payment" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/jsp/rating/feedback.jsp" value="file://$PROJECT_DIR$/src/main/webapp/jsp/rating" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/jsp/rating/rating.jsp" value="file://$PROJECT_DIR$/src/main/webapp/jsp/rating" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/jsp/ridebooking/editride.jsp" value="file://$PROJECT_DIR$/src/main/webapp/jsp/ridebooking" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/jsp/user/adminDashboard.jsp" value="file://$PROJECT_DIR$/src/main/webapp/jsp/user" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/jsp/user/profile.jsp" value="file://$PROJECT_DIR$/src/main/webapp/jsp/user" />
